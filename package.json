@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "RIVETKIT_STORAGE_PATH=\"$PWD/.local\" bun run --cwd apps/runner dev",
     "counter": "bun run --cwd apps/runner counter",
+    "destruction": "bun run --cwd apps/runner destruction",
     "check-types": "tsc --noEmit"
   },
   "workspaces": {
-    "packages": ["apps/*", "packages/*"],
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
     "catalog": {
       "rivetkit": "2.3.17",
       "@rivetkit/engine-cli": "2.3.17",

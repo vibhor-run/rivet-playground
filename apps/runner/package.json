@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun src/index.ts",
-    "counter": "bun src/client.ts"
+    "counter": "bun src/client.ts",
+    "destruction": "bun src/destruction.ts"
   },
   "dependencies": {
     "@playground/actors": "workspace:*",

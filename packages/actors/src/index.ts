@@ -9,11 +9,17 @@ export const counter = actor({
   onSleep: (c) => {
     console.log("[counter] sleep", c.state);
   },
+  onDestroy: (c) => {
+    console.log("[counter] destroy", c.state);
+  },
   actions: {
     increment: (c) => {
       c.state.count += 1;
       return c.state.count;
     },
     getCount: (c) => c.state.count,
+    destroy: (c) => {
+      c.destroy();
+    },
   },
 });

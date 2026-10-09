@@ -29,3 +29,9 @@ bun run counter -- another-counter
 `getOrCreate([key])` returns a handle: a client-side object used to call the
 remote actor. `client.dispose()` releases this client's connections when done.
 We will explore connections and actor identity in exercise 2.
+
+## Actor destruction
+
+With the runner active, run `bun run destruction` from the root. This creates
+and destroys a dedicated test counter, then verifies recreation at zero with a
+new actor ID. See the [experiment record](../../experiments/03-persistence/actor-destruction.md).
