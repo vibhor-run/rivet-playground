@@ -2,6 +2,11 @@
   "name": "rivet-playground",
   "private": true,
   "packageManager": "bun@1.3.14",
+  "scripts": {
+    "dev": "RIVETKIT_STORAGE_PATH=\"$PWD/.local\" bun run --cwd apps/runner dev",
+    "counter": "bun run --cwd apps/runner counter",
+    "check-types": "tsc --noEmit"
+  },
   "workspaces": {
     "packages": ["apps/*", "packages/*"],
     "catalog": {
@@ -9,5 +14,9 @@
       "@rivetkit/engine-cli": "2.3.17",
       "@rivetkit/workflow-engine": "2.3.17"
     }
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "typescript": "7.0.2"
   }
 }

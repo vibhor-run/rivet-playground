@@ -1,5 +1,13 @@
 {
   "name": "@playground/runner",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "dev": "bun src/index.ts",
+    "counter": "bun src/client.ts"
+  },
+  "dependencies": {
+    "@playground/actors": "workspace:*",
+    "rivetkit": "catalog:"
+  }
 }

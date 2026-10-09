@@ -1,5 +1,9 @@
 {
   "name": "@playground/actors",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "rivetkit": "catalog:"
+  }
 }
