@@ -1,0 +1,5 @@
+{
+  "name": "@playground/runner",
+  "private": true,
+  "type": "module"
+}
