@@ -1,5 +1,5 @@
 import { createClient } from "rivetkit/client";
-import type { registry } from "./registry";
+import type { registry } from "../../registry";
 
 const client = createClient<typeof registry>("http://127.0.0.1:6430");
 const key = process.argv[2] ?? "lesson-1";

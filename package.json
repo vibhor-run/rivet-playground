@@ -6,7 +6,13 @@
     "dev": "RIVETKIT_STORAGE_PATH=\"$PWD/.local\" bun run --cwd apps/runner dev",
     "counter": "bun run --cwd apps/runner counter",
     "destruction": "bun run --cwd apps/runner destruction",
-    "check-types": "tsc --noEmit"
+    "events": "bun run --cwd apps/runner events",
+    "check-types": "tsc --noEmit",
+    "errors": "bun run --cwd apps/runner errors",
+    "simultaneous": "bun run --cwd apps/runner simultaneous",
+    "overlap": "bun run --cwd apps/runner overlap",
+    "wait-first": "bun run --cwd apps/runner wait-first",
+    "queues": "bun run --cwd apps/runner queues"
   },
   "workspaces": {
     "packages": [

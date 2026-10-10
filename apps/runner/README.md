@@ -4,7 +4,7 @@ The Bun process that hosts our counter actor.
 
 - `src/registry.ts`: `setup()` registers the counter and configures the local engine.
 - `src/index.ts`: `registry.start()` starts the runner.
-- `src/client.ts`: a separate client sends four sequential actions to one counter.
+- `src/experiments/01-counter/client.ts`: a separate client sends four sequential actions to one counter.
   Its `import type` reads the registry's types without running the registry module.
 
 The engine and Bun runner are separate processes on your laptop. The engine
@@ -28,10 +28,145 @@ bun run counter -- another-counter
 
 `getOrCreate([key])` returns a handle: a client-side object used to call the
 remote actor. `client.dispose()` releases this client's connections when done.
-We will explore connections and actor identity in exercise 2.
 
-## Actor destruction
+## Exercise 2: identity
 
-With the runner active, run `bun run destruction` from the root. This creates
-and destroys a dedicated test counter, then verifies recreation at zero with a
-new actor ID. See the [experiment record](../../experiments/03-persistence/actor-destruction.md).
+Keep `bun run dev` running in one terminal. In another terminal at the repository
+root, run:
+
+```sh
+bun run identity -- my-shared-counter
+```
+
+`src/experiments/02-identity/client.ts` creates two independent clients in one script. Each calls
+`getOrCreate([key]).connect()` to open its own WebSocket connection to the same
+actor. Predict what B reads after A increments, and whether B can continue after
+A disconnects.
+
+For a fresh key, both read `0`; A increments to `1`; B reads `1`. Then A's
+connection is disposed, B increments to `2`, and B reads `2`. A different actor
+key, `[key, "other"]`, reads `0`. Reusing keys uses existing state; use a new key
+for a fresh demonstration.
+
+This verifies actor identity and independent client connections. It does not
+verify sleep, process restart, or actor destruction; those are exercise 3.
+
+The connection API was checked against the
+[official 2.3.17 source](https://github.com/rivet-dev/rivet/blob/v2.3.17/rivetkit-typescript/packages/rivetkit/src/client/actor-handle.ts).
+In v3, `packages/rivet/src/experiments/01-counter/client.ts` also opens a connection with
+`handle.connect()`, using the session ID as the actor key.
+
+## Exercise 3a: graceful worker restart
+
+`src/experiments/03-persistence/read.ts` uses `get([key])` and `getCount()` to read an existing actor without
+creating a replacement or incrementing the count.
+
+Keep `bun run dev` running in terminal 1. In terminal 2, choose an unused key:
+
+```sh
+bun run counter -- my-restart-counter
+bun run read -- my-restart-counter
+```
+
+The first command increments a fresh counter to `2`; the second reads `2`.
+Predict the result after restarting the worker. In terminal 1, press Ctrl-C,
+then run `bun run dev` again. In terminal 2:
+
+```sh
+bun run read -- my-restart-counter
+```
+
+It should still read `2`. Keep the engine running and retain `.local/` so this
+tests a worker restart only. Check the engine's process ID before and after with:
+
+```sh
+lsof -nP -iTCP:6430 -sTCP:LISTEN
+```
+
+Verified locally: the worker process changed, the engine process stayed the same,
+and the count remained `2`. This is a graceful shutdown test, not a forced crash.
+Rivet batches state saves (default interval: one second) and flushes state on
+sleep or shutdown; an action response alone does not establish that a save has
+completed. See the
+[official 2.3.17 state documentation](https://github.com/rivet-dev/rivet/blob/v2.3.17/docs/content/docs/state.mdx).
+
+In v3, Rivet state holds `sessionId` and `ownerUserId`; the conversation is saved
+separately in Postgres. The counter demonstrates Rivet state restoration only.
+Sleep/wake, engine restart, forced crashes, and destruction remain separate tests.
+
+## Exercise 3b: sleep and wake
+
+Start `bun run dev` in terminal 1. In terminal 2, use a fresh key:
+
+```sh
+bun run counter -- my-sleep-counter
+```
+
+Terminal 1 prints `[counter] wake` with count `0`. The counter reaches `2`.
+Leave it idle until terminal 1 prints `[counter] sleep` with count `2`, about
+five seconds after activity ends. Then run in terminal 2:
+
+```sh
+bun run read -- my-sleep-counter
+```
+
+Terminal 1 prints `[counter] wake` with count `2`; terminal 2 reads `2`.
+This sequence was verified with the worker running continuously. `onSleep`
+marks the start of sleep, not an exact measurement of when RAM is reclaimed.
+
+The timeout and hooks were checked against Rivet's
+[2.3.17 lifecycle documentation](https://github.com/rivet-dev/rivet/blob/v2.3.17/docs/content/docs/lifecycle.mdx).
+The default idle timeout is 30 seconds; our five-second setting makes the
+experiment quicker. Open connections and active work can prevent idle sleep.
+In v3, `packages/rivet/src/actor.ts` rebuilds its temporary session resources
+through `createVars` when the actor wakes, while persistent identity stays in
+Rivet state. Engine restart and actor destruction have not been tested yet.
+
+## Exercise 4: events
+
+Keep `bun run dev` running. In another terminal:
+
+```sh
+bun run events -- my-events-counter
+```
+
+`src/experiments/04-events/client.ts` subscribes two clients to `countChanged`. A increments; both
+receive the new count. B disconnects; A increments again and only A receives
+that event. Fresh-key results: A receives `[1, 2]`; B receives `[1]`.
+See the [record and explanation](../../experiments/04-events/README.md).
+
+## Exercise 6a: action errors
+
+With `bun run dev` running, run `bun run errors -- my-error-counter`.
+The script catches the deliberate `lesson_failure`, verifies that the count
+stayed unchanged, and increments successfully on the same connection.
+See the [error experiment](../../experiments/06-errors/README.md).
+
+## Exercise 6b: simultaneous increments
+
+With `bun run dev` running, run `bun run simultaneous -- my-simultaneous-counter`.
+Two connected clients issue increments before awaiting either response. A fresh
+actor returns `1` and `2` in either order, then reads `2`. See the
+[record and concurrency limits](../../experiments/06-errors/simultaneous.md).
+
+## Exercise 6c: overlap across await
+
+With `bun run dev` running, run `bun run overlap -- my-overlap-counter`.
+Both actions read, wait one second, then write from the saved value. Observed on
+a fresh key: both read `0`, both wrote `1`, final count `1`. Worker logs show
+both reads before either write. See the [record](../../experiments/06-errors/overlap.md).
+
+## Exercise 6d: wait before updating
+
+With `bun run dev` running: `bun run wait-first -- my-fixed-counter`.
+Both actions wait, then increment the current count synchronously. Fresh-key
+result: returns `1` and `2` in either order, final count `2`.
+See the [record](../../experiments/06-errors/wait-first.md).
+
+## Exercise 6e: queued increments
+
+With `bun run dev` running, use `bun run queues -- my-queued-counter`.
+`src/experiments/06-errors-and-concurrency/queues.ts` sends two messages to the separate queued counter, waits for their
+completion responses, and checks a net increase of two. Fresh-key result: count
+`2`, with worker logs showing each entire read/wait/write before the next.
+See the [queue record](../../experiments/06-errors/queues.md).

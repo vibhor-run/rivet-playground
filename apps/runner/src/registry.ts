@@ -1,8 +1,8 @@
-import { counter } from "@playground/actors";
+import { counter, queuedCounter } from "@playground/actors";
 import { setup } from "rivetkit";
 
 export const registry = setup({
-  use: { counter },
+  use: { counter, queuedCounter },
   startEngine: true,
   startServices: false,
   engineHost: "127.0.0.1",

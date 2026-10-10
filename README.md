@@ -70,13 +70,10 @@ In v3, `packages/rivet/src/actor.ts` defines `agentSession` with `actor()`, and
 the same basic structure without the agent's model, tools, or separate Postgres
 conversation storage.
 
-## Experiment records
-
-Procedures, observations, and recovery findings are recorded in
-[experiments/](experiments/README.md). The local `read` and `identity` scripts
-referenced there are intentionally excluded from this public repository.
-
 ## Learning order
+
+Test records live in [experiments/](experiments/README.md), with predictions,
+commands, versioned documentation, observed results, and limitations.
 
 1. Counter: `increment()` and `getCount()`.
 2. Identity: two clients, one actor.
@@ -89,3 +86,6 @@ referenced there are intentionally excluded from this public repository.
 
 For each exercise, predict the result before running it, observe what happens,
 and pause for questions before moving on.
+
+The local `identity` and `read` scripts remain excluded from this public
+repository as requested. Their documented commands require those local files.

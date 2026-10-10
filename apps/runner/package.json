@@ -4,8 +4,14 @@
   "type": "module",
   "scripts": {
     "dev": "bun src/index.ts",
-    "counter": "bun src/client.ts",
-    "destruction": "bun src/destruction.ts"
+    "counter": "bun src/experiments/01-counter/client.ts",
+    "destruction": "bun src/experiments/03-persistence/destruction.ts",
+    "events": "bun src/experiments/04-events/client.ts",
+    "errors": "bun src/experiments/06-errors-and-concurrency/errors.ts",
+    "simultaneous": "bun src/experiments/06-errors-and-concurrency/simultaneous.ts",
+    "overlap": "bun src/experiments/06-errors-and-concurrency/overlap.ts",
+    "wait-first": "bun src/experiments/06-errors-and-concurrency/wait-first.ts",
+    "queues": "bun src/experiments/06-errors-and-concurrency/queues.ts"
   },
   "dependencies": {
     "@playground/actors": "workspace:*",
