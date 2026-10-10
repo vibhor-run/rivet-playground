@@ -80,3 +80,21 @@ until completion; the documentation incorrectly says otherwise.
 Queue crash investigation resolved: `completable: true` retains messages until
 completion in both 2.3.17 and current main. See the source-backed correction in
 [the record](06-errors/queue-crash.md).
+
+[First workflow](07-workflows/README.md): normal execution passed, two named
+steps produce 21 then 42. Workflow crash recovery remains untested.
+
+[Workflow recovery](07-workflows/recovery.md): passed. Completed step 1 callback
+was skipped after worker restart, result 21 reused, unfinished step 2 reran and
+produced 42. First read hit the known post-crash routing error; a new read worked.
+
+[Repeated workflow effects](07-workflows/repeated-effect.md): user prediction
+confirmed. An unfinished step appended once before the crash and again after
+restart, leaving two lines from different worker PIDs.
+
+[Idempotent workflow effect](07-workflows/idempotent-effect.md): replay uses the
+same unique job ID; the original worker inserts, the restarted worker skips it.
+
+[v3 source map](08-v3-mapping/README.md): read-only mapping of actor identity,
+actions, events, explicit sequencing, pi-durable/Postgres chat recovery, and
+separate Rivet background workflows. No v3 runtime verification performed.

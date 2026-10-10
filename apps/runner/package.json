@@ -14,7 +14,11 @@
     "overlap": "bun src/experiments/06-errors-and-concurrency/overlap.ts",
     "wait-first": "bun src/experiments/06-errors-and-concurrency/wait-first.ts",
     "queues": "bun src/experiments/06-errors-and-concurrency/queues.ts",
-    "queue-crash": "bun src/experiments/06-errors-and-concurrency/queue-crash.ts"
+    "queue-crash": "bun src/experiments/06-errors-and-concurrency/queue-crash.ts",
+    "workflow": "bun src/experiments/07-workflows/client.ts",
+    "workflow-recovery": "bun src/experiments/07-workflows/recovery.ts",
+    "workflow-effect": "bun src/experiments/07-workflows/repeated-effect.ts",
+    "workflow-idempotent": "bun src/experiments/07-workflows/idempotent-effect.ts"
   },
   "dependencies": {
     "@playground/actors": "workspace:*",

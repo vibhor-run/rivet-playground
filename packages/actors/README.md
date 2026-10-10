@@ -37,3 +37,7 @@ state without yielding during the update. Compare it with `incrementAfterWait`.
 processes increment messages one at a time, including the read/wait/write sequence.
 The queue is declared in `queues`; `getCount` is a read-only action. See the
 [queue experiment](../../experiments/06-errors/queues.md).
+
+`src/07-workflows/actor.ts` defines `workflowDemo` with `run: workflow(...)`.
+Two named steps produce 21 and store its doubled value. `getResult` reads that
+value. See the [workflow record](../../experiments/07-workflows/README.md).

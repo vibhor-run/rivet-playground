@@ -178,3 +178,30 @@ worker-kill procedure in the [record](../../experiments/06-errors/queue-crash.md
 `bun run queue-crash -- inspect KEY` only reads state. Observed recovery differed
 from the documentation: the original message replayed. Source inspection
 confirmed that `completable: true` retains messages until completion.
+
+## Exercise 7a: first workflow
+
+With `bun run dev` running, run `bun run workflow -- my-first-workflow`.
+A fresh actor executes two named steps and returns 42 through a read action.
+See the [workflow explanation](../../experiments/07-workflows/README.md).
+
+## Exercise 7b: workflow recovery
+
+Follow the [recovery procedure](../../experiments/07-workflows/recovery.md).
+`bun run workflow-recovery -- start KEY` starts a separate workflow actor;
+`bun run workflow-recovery -- read KEY` reads the existing actor. After a crash
+in step 2, step 1's recorded result was reused and step 2 reran to produce 42.
+
+## Exercise 7c: repeated effects
+
+The [controlled crash procedure](../../experiments/07-workflows/repeated-effect.md)
+uses `bun run workflow-effect -- start|read KEY`. An unfinished step appends to
+an external local file before waiting. After restart it appends again, showing
+why recovery is not exactly-once external execution.
+
+## Exercise 7d: idempotency
+
+Follow the [idempotency experiment](../../experiments/07-workflows/idempotent-effect.md).
+`bun run workflow-idempotent -- start|read KEY` uses a unique job ID in a separate
+local SQLite effect store, so a replayed workflow callback cannot add another
+row for the same job.

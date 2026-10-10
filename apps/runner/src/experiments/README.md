@@ -29,3 +29,20 @@ the persistence lessons; no separate lesson 5 client has been added.
 Queue crash: `06-errors-and-concurrency/queue-crash.ts`, commands
 `bun run queue-crash -- send KEY` and `bun run queue-crash -- check KEY`.
 Follow the crash procedure in `experiments/06-errors/queue-crash.md`.
+
+Workflow basics: `07-workflows/client.ts`, command `bun run workflow -- KEY`.
+Actor definition: `packages/actors/src/07-workflows/actor.ts`. Two steps produce
+21 and double it to 42. Recovery is not tested by this script.
+
+Workflow recovery: `07-workflows/recovery.ts`, command
+`bun run workflow-recovery -- start|read KEY`. Follow the worker-kill procedure
+in `experiments/07-workflows/recovery.md`.
+
+Repeated workflow effect: `07-workflows/repeated-effect.ts`, command
+`bun run workflow-effect -- start|read KEY`. Follow the controlled crash procedure
+in `experiments/07-workflows/repeated-effect.md`.
+
+Idempotent workflow effect: `07-workflows/idempotent-effect.ts`, command
+`bun run workflow-idempotent -- start|read KEY`. The actor inserts an effect row
+with a unique job ID before waiting. See the controlled crash procedure in
+`experiments/07-workflows/idempotent-effect.md`.

@@ -15,7 +15,11 @@
     "overlap": "bun run --cwd apps/runner overlap",
     "wait-first": "bun run --cwd apps/runner wait-first",
     "queues": "bun run --cwd apps/runner queues",
-    "queue-crash": "bun run --cwd apps/runner queue-crash"
+    "queue-crash": "bun run --cwd apps/runner queue-crash",
+    "workflow": "bun run --cwd apps/runner workflow",
+    "workflow-recovery": "bun run --cwd apps/runner workflow-recovery",
+    "workflow-effect": "bun run --cwd apps/runner workflow-effect",
+    "workflow-idempotent": "bun run --cwd apps/runner workflow-idempotent"
   },
   "workspaces": {
     "packages": [
