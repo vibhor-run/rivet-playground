@@ -6,8 +6,8 @@ Each client imports only the registry's types; the runner executes actor code.
 | Lesson | Client file | Command |
 | --- | --- | --- |
 | Counter | `01-counter/client.ts` | `bun run counter -- KEY` |
-| Identity (local only) | `02-identity/client.ts` | `bun run identity -- KEY` |
-| Persistence read (local only) | `03-persistence/read.ts` | `bun run read -- KEY` |
+| Identity | `02-identity/client.ts` | `bun run identity -- KEY` |
+| Persistence read | `03-persistence/read.ts` | `bun run read -- KEY` |
 | Destruction | `03-persistence/destruction.ts` | `bun run destruction` |
 | Events | `04-events/client.ts` | `bun run events -- KEY` |
 | Errors | `06-errors-and-concurrency/errors.ts` | `bun run errors -- KEY` |

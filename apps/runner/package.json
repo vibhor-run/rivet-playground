@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "bun src/index.ts",
     "counter": "bun src/experiments/01-counter/client.ts",
+    "identity": "bun src/experiments/02-identity/client.ts",
+    "read": "bun src/experiments/03-persistence/read.ts",
     "destruction": "bun src/experiments/03-persistence/destruction.ts",
     "events": "bun src/experiments/04-events/client.ts",
     "errors": "bun src/experiments/06-errors-and-concurrency/errors.ts",

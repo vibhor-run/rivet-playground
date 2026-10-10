@@ -44,8 +44,7 @@ Each experiment records:
 - Conclusion, limitations, and the equivalent concept in v3.
 
 Only record observed results as passed. Process-local data and logs stay in the
-git-ignored `.local/` folder; never include credentials. The local `read` and
-`identity` scripts remain uncommitted as requested.
+git-ignored `.local/` folder; never include credentials.
 
 [Action errors](06-errors/README.md): passed, the client catches `lesson_failure`,
 reads the unchanged count, and increments successfully on the same connection.

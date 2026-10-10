@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "RIVETKIT_STORAGE_PATH=\"$PWD/.local\" bun run --cwd apps/runner dev",
     "counter": "bun run --cwd apps/runner counter",
+    "identity": "bun run --cwd apps/runner identity",
+    "read": "bun run --cwd apps/runner read",
     "destruction": "bun run --cwd apps/runner destruction",
     "events": "bun run --cwd apps/runner events",
     "check-types": "tsc --noEmit",

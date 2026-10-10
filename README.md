@@ -16,6 +16,12 @@ bun install
   A catalog is a shared list of dependency versions; it does not install packages
   until a workspace declares that it needs them.
 - Exercise 1 is ready: a counter actor with `increment()` and `getCount()`.
+- Exercise 2 is ready: `bun run identity -- my-shared-counter` opens two clients
+  to the same counter, closes A, and continues through B. See
+  [the runner README](apps/runner/README.md#exercise-2-identity).
+- Exercise 3a is ready: `bun run read -- my-restart-counter` reads an existing
+  counter without changing it, for the graceful worker restart experiment in
+  [the runner README](apps/runner/README.md#exercise-3a-graceful-worker-restart).
 - Keep playground data and credentials separate from v3. Never copy v3's secrets.
 
 ## Exercise 1: counter
@@ -86,6 +92,3 @@ commands, versioned documentation, observed results, and limitations.
 
 For each exercise, predict the result before running it, observe what happens,
 and pause for questions before moving on.
-
-The local `identity` and `read` scripts remain excluded from this public
-repository as requested. Their documented commands require those local files.
