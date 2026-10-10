@@ -205,3 +205,17 @@ Follow the [idempotency experiment](../../experiments/07-workflows/idempotent-ef
 `bun run workflow-idempotent -- start|read KEY` uses a unique job ID in a separate
 local SQLite effect store, so a replayed workflow callback cannot add another
 row for the same job.
+
+## Exercise 9: cron
+
+With `bun run dev` running: `bun run cron -- my-cron-counter`.
+The job runs every minute. The script observes the first tick and deletes the
+job. Expect up to a minute of waiting. See the
+[cron record](../../experiments/09-scheduling/README.md).
+
+## Automatic cron and sleep
+
+Follow the [procedure](../../experiments/09-scheduling/sleeping-cron.md).
+`bun run cron-sleep -- create KEY` creates the actor and exits. Watch its SLEEP,
+WAKE, TICK logs, then `bun run cron-sleep -- check KEY` verifies count 1 and
+removes the recurring job. Use a fresh key and check before the second tick.

@@ -4,3 +4,7 @@ export { workflowDemo } from "./07-workflows/actor";
 export { workflowRecovery } from "./07-workflows/recovery";
 export { workflowEffect } from "./07-workflows/repeated-effect";
 export { workflowIdempotent } from "./07-workflows/idempotent-effect";
+export { cronCounter } from "./09-scheduling/actor";
+export { sleepingCron } from "./09-scheduling/sleeping-cron";
+export { protectedCounter } from "./10-authentication/actor";
+export { demoSession, notificationInbox } from "./11-actor-communication/actor";

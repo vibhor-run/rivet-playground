@@ -2,8 +2,12 @@
   "name": "@playground/actors",
   "private": true,
   "type": "module",
-  "exports": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./auth-tokens": "./src/10-authentication/tokens.ts"
+  },
   "dependencies": {
-    "rivetkit": "catalog:"
+    "rivetkit": "catalog:",
+    "jose": "6.1.3"
   }
 }

@@ -41,3 +41,7 @@ The queue is declared in `queues`; `getCount` is a read-only action. See the
 `src/07-workflows/actor.ts` defines `workflowDemo` with `run: workflow(...)`.
 Two named steps produce 21 and store its doubled value. `getResult` reads that
 value. See the [workflow record](../../experiments/07-workflows/README.md).
+
+`src/09-scheduling/actor.ts` defines `cronCounter`. `startCron` registers a
+minute-boundary increment; `stopCron` deletes it. The scheduled action broadcasts
+a tick. This is separate from the original and queued counters.

@@ -18,7 +18,11 @@
     "workflow": "bun src/experiments/07-workflows/client.ts",
     "workflow-recovery": "bun src/experiments/07-workflows/recovery.ts",
     "workflow-effect": "bun src/experiments/07-workflows/repeated-effect.ts",
-    "workflow-idempotent": "bun src/experiments/07-workflows/idempotent-effect.ts"
+    "workflow-idempotent": "bun src/experiments/07-workflows/idempotent-effect.ts",
+    "cron": "bun src/experiments/09-scheduling/client.ts",
+    "cron-sleep": "bun src/experiments/09-scheduling/sleeping-cron.ts",
+    "auth": "bun src/experiments/10-authentication/client.ts",
+    "actor-call": "bun src/experiments/11-actor-communication/client.ts"
   },
   "dependencies": {
     "@playground/actors": "workspace:*",

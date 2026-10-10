@@ -46,3 +46,19 @@ Idempotent workflow effect: `07-workflows/idempotent-effect.ts`, command
 `bun run workflow-idempotent -- start|read KEY`. The actor inserts an effect row
 with a unique job ID before waiting. See the controlled crash procedure in
 `experiments/07-workflows/idempotent-effect.md`.
+
+Cron: `09-scheduling/client.ts`, command `bun run cron -- KEY`. Actor definition
+`packages/actors/src/09-scheduling/actor.ts`. Waits for one minute-boundary tick
+and deletes the recurring job afterward.
+
+Automatic cron and sleep: `09-scheduling/sleeping-cron.ts`, command
+`bun run cron-sleep -- create|check KEY`. Follow
+`experiments/09-scheduling/sleeping-cron.md`; create exits, observe lifecycle
+logs, then check and delete the job after the first scheduled tick.
+
+Authentication: `10-authentication/client.ts`, command `bun run auth -- KEY`.
+See `experiments/10-authentication/README.md` for credentials and permissions.
+
+Actor communication: `11-actor-communication/client.ts`, command
+`bun run actor-call -- KEY`. Session actor calls notification actor's `record`
+action. See `experiments/11-actor-communication/README.md`.

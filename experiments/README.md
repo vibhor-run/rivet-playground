@@ -98,3 +98,17 @@ same unique job ID; the original worker inserts, the restarted worker skips it.
 [v3 source map](08-v3-mapping/README.md): read-only mapping of actor identity,
 actions, events, explicit sequencing, pi-durable/Postgres chat recovery, and
 separate Rivet background workflows. No v3 runtime verification performed.
+
+[First cron job](09-scheduling/README.md): passed, scheduled increment fired at
+the minute boundary, count 1, then job deletion verified. Sleep/restart untested.
+
+[Automatic cron and sleep](09-scheduling/sleeping-cron.md): passed. Create client
+exited, actor slept at 0, cron woke it and incremented to 1 before any new client
+request. Check deleted the job and verified removal.
+
+[Connection authentication](10-authentication/README.md): passed. Owner increments,
+viewer reads but cannot increment, and a tampered JWT is rejected. The denied
+write leaves the count unchanged.
+
+[Actor communication](11-actor-communication/README.md): passed. Session actor
+calls notification actor, which records the message and returns count 1.
