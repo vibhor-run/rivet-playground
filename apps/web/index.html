@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rivet Playground — Sessions</title>
+  </head>
+  <body>
+    <div class="app">
+      <aside>
+        <a class="brand" href="/">rivet<span>playground</span></a>
+        <div class="section-label">YOUR WORKSPACE</div>
+        <button id="new-session" class="new-session">＋ New conversation</button>
+        <nav id="sessions" aria-label="Conversations"></nav>
+        <div class="sidebar-footer"><span class="dot"></span> Local playground</div>
+      </aside>
+      <main>
+        <header><div><span class="section-label">SESSION</span><h1 id="session-title">New conversation</h1></div><span id="status" role="status">Connecting…</span></header>
+        <section id="messages" aria-label="Messages" aria-live="polite"></section>
+        <div class="composer-wrap">
+          <p id="error" role="alert"></p>
+          <form id="composer">
+            <label class="sr-only" for="prompt">Message</label>
+            <textarea id="prompt" placeholder="Ask something, or try adding two numbers…" maxlength="4000" rows="2"></textarea>
+            <div class="composer-bottom"><span id="model">Agent</span><button id="send" type="submit" aria-label="Send message">↑</button></div>
+          </form>
+          <p class="hint">Enter to send · Shift + Enter for a new line</p>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

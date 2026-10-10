@@ -3,6 +3,13 @@
 A separate Bun monorepo for learning Rivet one experiment at a time, then
 building a small prototype inspired by Runable v3.
 
+## Simple agent frontend
+
+The first prototype is ready: a chat page, one Rivet actor per session,
+streaming replies, and an addition tool. Start with the
+[setup and code walkthrough](experiments/12-agent-session/README.md).
+Use your own model API key; no storage or sandbox services are required.
+
 ## Setup
 
 ```sh

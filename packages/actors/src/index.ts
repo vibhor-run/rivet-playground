@@ -8,3 +8,4 @@ export { cronCounter } from "./09-scheduling/actor";
 export { sleepingCron } from "./09-scheduling/sleeping-cron";
 export { protectedCounter } from "./10-authentication/actor";
 export { demoSession, notificationInbox } from "./11-actor-communication/actor";
+export { agentSession } from "./12-agent-session/actor";

@@ -1,0 +1,8 @@
+{
+  "name": "@playground/web",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vite --host 127.0.0.1 --port 5173 --strictPort", "build": "vite build" },
+  "dependencies": { "rivetkit": "catalog:" },
+  "devDependencies": { "vite": "8.0.2" }
+}

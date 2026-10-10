@@ -23,7 +23,9 @@
     "cron": "bun run --cwd apps/runner cron",
     "cron-sleep": "bun run --cwd apps/runner cron-sleep",
     "auth": "bun run --cwd apps/runner auth",
-    "actor-call": "bun run --cwd apps/runner actor-call"
+    "actor-call": "bun run --cwd apps/runner actor-call",
+    "web": "bun run --cwd apps/web dev",
+    "build:web": "bun run --cwd apps/web build"
   },
   "workspaces": {
     "packages": [

@@ -112,3 +112,7 @@ write leaves the count unchanged.
 
 [Actor communication](11-actor-communication/README.md): passed. Session actor
 calls notification actor, which records the message and returns count 1.
+
+[Minimal agent frontend](12-agent-session/README.md): browser and actor integration
+verified with a test-only provider fixture. Real-model verification requires
+a locally configured provider key.
