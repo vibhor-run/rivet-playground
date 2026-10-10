@@ -13,7 +13,8 @@
     "simultaneous": "bun src/experiments/06-errors-and-concurrency/simultaneous.ts",
     "overlap": "bun src/experiments/06-errors-and-concurrency/overlap.ts",
     "wait-first": "bun src/experiments/06-errors-and-concurrency/wait-first.ts",
-    "queues": "bun src/experiments/06-errors-and-concurrency/queues.ts"
+    "queues": "bun src/experiments/06-errors-and-concurrency/queues.ts",
+    "queue-crash": "bun src/experiments/06-errors-and-concurrency/queue-crash.ts"
   },
   "dependencies": {
     "@playground/actors": "workspace:*",

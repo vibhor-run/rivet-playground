@@ -25,3 +25,7 @@ only the queue lesson uses the separate queued counter.
 Detailed procedures, results, limits, and official references are in the root
 `experiments/` notebook. Lesson 5's basic lifecycle behavior was exercised during
 the persistence lessons; no separate lesson 5 client has been added.
+
+Queue crash: `06-errors-and-concurrency/queue-crash.ts`, commands
+`bun run queue-crash -- send KEY` and `bun run queue-crash -- check KEY`.
+Follow the crash procedure in `experiments/06-errors/queue-crash.md`.

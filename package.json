@@ -14,7 +14,8 @@
     "simultaneous": "bun run --cwd apps/runner simultaneous",
     "overlap": "bun run --cwd apps/runner overlap",
     "wait-first": "bun run --cwd apps/runner wait-first",
-    "queues": "bun run --cwd apps/runner queues"
+    "queues": "bun run --cwd apps/runner queues",
+    "queue-crash": "bun run --cwd apps/runner queue-crash"
   },
   "workspaces": {
     "packages": [

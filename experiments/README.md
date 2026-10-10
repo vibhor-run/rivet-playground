@@ -70,3 +70,13 @@ file and command. Actor definitions are separate from the scripts that call them
 lessons; `packages/actors/src/06-queues/actor.ts` is the queue example. The actor
 package's `src/index.ts` only exports definitions. The runner's `registry.ts`
 registers them and its `index.ts` starts the worker.
+
+[Queue crash](06-errors/queue-crash.md): prediction failed. Sender timed out, but
+the received CRASH-TEST message appeared again after restart and completed.
+First recovery read hit `internal_error`; the new queued message also outlived
+its client's timeout. Source inspection resolved the discrepancy: completable messages are retained
+until completion; the documentation incorrectly says otherwise.
+
+Queue crash investigation resolved: `completable: true` retains messages until
+completion in both 2.3.17 and current main. See the source-backed correction in
+[the record](06-errors/queue-crash.md).

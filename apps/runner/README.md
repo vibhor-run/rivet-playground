@@ -170,3 +170,11 @@ With `bun run dev` running, use `bun run queues -- my-queued-counter`.
 completion responses, and checks a net increase of two. Fresh-key result: count
 `2`, with worker logs showing each entire read/wait/write before the next.
 See the [queue record](../../experiments/06-errors/queues.md).
+
+## Queue crash experiment
+
+`bun run queue-crash -- send KEY` sends a long operation. Follow the exact
+worker-kill procedure in the [record](../../experiments/06-errors/queue-crash.md).
+`bun run queue-crash -- inspect KEY` only reads state. Observed recovery differed
+from the documentation: the original message replayed. Source inspection
+confirmed that `completable: true` retains messages until completion.

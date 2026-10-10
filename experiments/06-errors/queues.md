@@ -85,3 +85,11 @@ and [client example](https://github.com/rivet-dev/rivet/blob/v2.3.17/examples/do
 No direct `c.queue` usage was found in v3's `packages/rivet/src/actor.ts` during
 this exercise. This is a separate learning example, not a claim about how v3
 sequences its agent work. Workflows and the v3 mapping remain later exercises.
+
+## Correction after inspecting the runtime
+
+Our consumer uses `completable: true`. Such messages stay stored until
+`message.complete()`, and can be received again after a crash before completion.
+Non-completable messages are removed on receipt. The earlier general no-replay
+statement, based on stale documentation, does not apply to our consumer. See the
+[source-backed crash investigation](queue-crash.md).

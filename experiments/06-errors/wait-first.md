@@ -59,3 +59,11 @@ removed when received, not when completed. A crash during processing therefore
 does not automatically redeliver that received message. Durable workflows are a
 separate recovery concept we will test later. No queue was implemented or tested
 in this exercise.
+
+## Correction after inspecting the runtime
+
+Our consumer uses `completable: true`. Such messages stay stored until
+`message.complete()`, and can be received again after a crash before completion.
+Non-completable messages are removed on receipt. The earlier general no-replay
+statement, based on stale documentation, does not apply to our consumer. See the
+[source-backed crash investigation](queue-crash.md).
